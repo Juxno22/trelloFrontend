@@ -1,5 +1,5 @@
 
-const API_URL = 'https://taskdiagsa.up.railway.app/';
+const API_URL = 'https://taskdiagsa.up.railway.app';
 
 const loginScreen = document.getElementById('login-screen');
 const boardScreen = document.getElementById('board-screen');
