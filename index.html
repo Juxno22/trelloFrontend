@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kanban Equipo</title>
+
+  <!-- Tipografías: Poppins para títulos/botones, Inter para texto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============================================================ -->
+  <!-- PANTALLA DE LOGIN -->
+  <!-- ============================================================ -->
+  <div id="login-screen" class="screen">
+    <div class="login-card">
+      <div class="login-brand">
+        <span class="logo-dot"></span>
+        <span class="logo-dot"></span>
+        <span class="logo-dot"></span>
+      </div>
+      <h1>Kanban Equipo</h1>
+      <p class="subtitle">Inicia sesión para ver el tablero</p>
+
+      <form id="login-form" novalidate>
+        <label for="login-name">Usuario</label>
+        <select id="login-name" required>
+          <option value="" disabled selected>Selecciona tu nombre</option>
+          <option value="Juan">Juan</option>
+          <option value="Benkis">Benkis</option>
+          <option value="Kevin">Kevin</option>
+        </select>
+
+        <label for="login-password">Contraseña</label>
+        <input type="password" id="login-password" placeholder="••••••••" required />
+
+        <p id="login-error" class="error-message hidden"></p>
+
+        <button type="submit" class="btn-primary btn-block" id="login-submit-btn">Entrar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PANTALLA DEL TABLERO (oculta hasta hacer login) -->
+  <!-- ============================================================ -->
+  <div id="board-screen" class="screen hidden">
+
+    <header class="board-header">
+      <div class="header-left">
+        <span class="logo-dot"></span>
+        <h1>Kanban Equipo</h1>
+      </div>
+      <div class="header-right">
+        <span id="current-user-label" class="user-label"></span>
+        <button id="add-task-btn" class="btn-primary">+ Nueva tarea</button>
+        <button id="logout-btn" class="btn-secondary">Salir</button>
+      </div>
+    </header>
+
+    <main class="board" id="board">
+
+      <section class="column" data-column="Pendiente">
+        <div class="column-header column-header--pendiente">
+          <h2>Pendiente</h2>
+          <span class="task-count" id="count-Pendiente">0</span>
+        </div>
+        <div class="card-list" id="list-Pendiente" data-column="Pendiente"></div>
+      </section>
+
+      <section class="column" data-column="En Progreso">
+        <div class="column-header column-header--progreso">
+          <h2>En Progreso</h2>
+          <span class="task-count" id="count-En Progreso">0</span>
+        </div>
+        <div class="card-list" id="list-En Progreso" data-column="En Progreso"></div>
+      </section>
+
+      <section class="column" data-column="Terminado">
+        <div class="column-header column-header--terminado">
+          <h2>Terminado</h2>
+          <span class="task-count" id="count-Terminado">0</span>
+        </div>
+        <div class="card-list" id="list-Terminado" data-column="Terminado"></div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- MODAL: NUEVA TAREA -->
+  <!-- ============================================================ -->
+  <div id="task-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <h2>Nueva tarea</h2>
+      <form id="task-form" novalidate>
+        <label for="task-title">Título</label>
+        <input type="text" id="task-title" maxlength="255" placeholder="Ej. Diseñar logo" required />
+
+        <label for="task-description">Descripción corta</label>
+        <textarea id="task-description" maxlength="500" rows="3" placeholder="Detalles breves de la tarea..."></textarea>
+
+        <label for="task-assigned">Asignado a</label>
+        <select id="task-assigned" required>
+          <option value="Juan">Juan</option>
+          <option value="Benkis">Benkis</option>
+          <option value="Kevin">Kevin</option>
+        </select>
+
+        <div class="modal-actions">
+          <button type="button" id="cancel-task-btn" class="btn-secondary">Cancelar</button>
+          <button type="submit" class="btn-primary">Agregar tarea</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Notificación simple de errores/éxitos -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
